@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>العيادة الطبية | الحجز ومتابعة الطابور مباشرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #F5F5F7;
+      --bg-secondary: #FFFFFF;
+      --bg-tertiary: #EFEFF4;
+      --text-primary: #1D1D1F;
+      --text-secondary: #6E6E73;
+      --text-muted: #86868B;
+      --accent-dark: #1D1D1F;
+      --accent-blue: #0071E3;
+      --accent-blue-hover: #0077ED;
+      --accent-blue-soft: rgba(0, 113, 227, 0.08);
+      --border-soft: rgba(0, 0, 0, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+      --success: #28CD41;
+      --success-bg: #E8F9EC;
+      --warning: #FF9500;
+      --warning-bg: #FFF5E5;
+      --danger: #FF3B30;
+      --danger-bg: #FFECEB;
+      --whatsapp: #25D366;
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 24px;
+      --radius-pill: 980px;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", 'Tajawal', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 85px;
+    }
+
+    /* Apple Glass Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-soft);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-soft);
+      display: none;
+    }
+
+    .brand-logo-placeholder {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--accent-dark);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-specialty {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-dark {
+      background: var(--accent-dark);
+      color: #FFFFFF;
+    }
+
+    .btn-dark:hover {
+      background: #333336;
+      transform: scale(1.015);
+    }
+
+    .btn-blue {
+      background: var(--accent-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-blue:hover {
+      background: var(--accent-blue-hover);
+      transform: scale(1.015);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #FFFFFF;
+    }
+
+    .btn-whatsapp:hover {
+      opacity: 0.94;
+      transform: scale(1.015);
+    }
+
+    .btn-subtle {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .btn-subtle:hover {
+      background: #E4E4EA;
+    }
+
+    /* Hero & Live Queue Monitor */
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 42px 24px 28px;
+    }
+
+    .hero-top {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+
+    .clinic-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-soft);
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(40, 205, 65, 0.18);
+    }
+
+    .status-indicator.busy {
+      background: var(--warning);
+      box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.18);
+    }
+
+    .status-indicator.closed {
+      background: var(--danger);
+      box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.18);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.18;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .meta-pill {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-soft);
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .meta-pill span {
+      color: var(--text-muted);
+    }
+
+    /* Live Queue Monitor Bento Card */
+    .live-queue-board {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-md);
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .queue-now-box {
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+      position: relative;
+    }
+
+    .queue-live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-blue-soft);
+      color: var(--accent-blue);
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .queue-number-giant {
+      font-size: clamp(3.6rem, 7vw, 5.2rem);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin: 8px 0 12px;
+    }
+
+    .queue-number-caption {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .queue-stats-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .queue-info-item {
+      background: var(--bg-primary);
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .queue-info-label {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .queue-info-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .my-ticket-lookup {
+      background: #F0F6FF;
+      border: 1px solid rgba(0, 113, 227, 0.18);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Swipeable Clinic Photos Carousel */
+    .clinic-gallery-section {
+      margin-top: 24px;
+      display: none;
+    }
+
+    .swipe-gallery {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+    }
+
+    .swipe-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    .swipe-slide {
+      flex: 0 0 85%;
+      max-width: 720px;
+      height: 360px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      scroll-snap-align: center;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+      background: var(--bg-tertiary);
+    }
+
+    .swipe-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Section Containers */
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.4px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-top: 4px;
+    }
+
+    /* Available Days / Sessions Grid */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 24px;
+    }
+
+    .day-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .day-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .day-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .day-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .day-date-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .spots-badge {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: var(--success-bg);
+      color: #158527;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spots-badge.low {
+      background: var(--warning-bg);
+      color: #B26200;
+    }
+
+    .spots-badge.full {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .day-details-box {
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .day-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .day-book-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .day-book-btn:disabled {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .empty-box {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 52px 24px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+      grid-column: 1 / -1;
+    }
+
+    /* Bento Grid for Specialties & Rules */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .bento-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bento-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 12px;
+    }
+
+    .service-chip {
+      background: var(--bg-primary);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .service-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    .rules-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rules-list li {
+      background: var(--bg-primary);
+      padding: 13px 16px;
+      padding-right: 34px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      position: relative;
+    }
+
+    .rules-list li::before {
+      content: "•";
+      position: absolute;
+      right: 14px;
+      top: 10px;
+      color: var(--accent-blue);
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    /* Booking Modal & Instant Electronic Ticket (Bottom Sheet on Mobile) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(29, 29, 31, 0.52);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--bg-secondary);
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-soft);
+      max-height: 92vh;
+      overflow-y: auto;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-pull-bar {
+      width: 42px;
+      height: 5px;
+      background: #D1D1D6;
+      border-radius: 10px;
+      margin: 0 auto 16px;
+      display: none;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .selected-day-banner {
+      background: var(--bg-primary);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border-soft);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: var(--bg-primary);
+      font-size: 0.96rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-select:focus {
+      background: #FFFFFF;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+    }
+
+    /* Electronic Ticket Confirmation Card */
+    .ticket-card-view {
+      display: none;
+      text-align: center;
+    }
+
+    .ticket-visual {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      margin: 16px 0 22px;
+      position: relative;
+    }
+
+    .ticket-number-circle {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--accent-dark);
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .ticket-number-circle span {
+      font-size: 0.72rem;
+      opacity: 0.8;
+    }
+
+    .ticket-number-circle strong {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .ticket-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: right;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.12);
+      font-size: 0.88rem;
+    }
+
+    .ticket-meta-item span {
+      color: var(--text-muted);
+      display: block;
+      font-size: 0.78rem;
+    }
+
+    /* Desktop Floating Buttons */
+    .desktop-floating-actions {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1500;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .fab-btn {
+      padding: 13px 22px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-lg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .fab-chat {
+      background: var(--accent-dark);
+      color: #FFFFFF;
+    }
+
+    .fab-whatsapp {
+      background: var(--whatsapp);
+      color: #FFFFFF;
+    }
+
+    .fab-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Mobile Apple Glass Bottom Bar */
+    .mobile-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1550;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-top: 1px solid var(--border-soft);
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .bottom-nav-item .icon {
+      font-size: 1.25rem;
+    }
+
+    .bottom-nav-item.active, .bottom-nav-item:hover {
+      color: var(--accent-blue);
+    }
+
+    /* Direct Chat Window (10 Messages Limit) */
+    .chat-window {
+      position: fixed;
+      bottom: 90px;
+      left: 24px;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 530px;
+      max-height: calc(100vh - 140px);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-soft);
+      z-index: 1700;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-window.open {
+      display: flex;
+    }
+
+    .chat-header {
+      background: var(--bg-primary);
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-counters-bar {
+      background: var(--bg-tertiary);
+      padding: 8px 16px;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-soft);
+      font-weight: 700;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #FAFAFC;
+    }
+
+    .msg-bubble {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      word-wrap: break-word;
+    }
+
+    .msg-patient {
+      background: var(--accent-blue);
+      color: #FFFFFF;
+      align-self: flex-start;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-admin {
+      background: #E9E9EB;
+      color: var(--text-primary);
+      align-self: flex-end;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-meta {
+      font-size: 0.68rem;
+      opacity: 0.75;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .chat-footer {
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      background: var(--bg-primary);
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .chat-locked-banner {
+      background: var(--danger-bg);
+      color: var(--danger);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-soft);
+      padding: 32px 24px;
+      margin-top: 40px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    /* Mobile App-Like Adjustments */
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions .btn-subtle, .desktop-floating-actions {
+        display: none;
+      }
+      .mobile-bottom-bar {
+        display: grid;
+      }
+      .live-queue-board {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .swipe-slide {
+        height: 240px;
+      }
+      .modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .modal-card {
+        max-width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 20px 20px 30px;
+      }
+      .modal-pull-bar {
+        display: block;
+      }
+      .chat-window {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        bottom: 76px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img id="navLogo" class="brand-logo" alt="شعار العيادة" />
+        <div id="navLogoPlaceholder" class="brand-logo-placeholder">ع</div>
+        <div class="brand-info">
+          <span id="navClinicName" class="brand-name">العيادة الطبية</span>
+          <span id="navDoctorSpecialty" class="brand-specialty">طب عام واستشارات طبية</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#liveQueueSection">الطابور المباشر</a></li>
+        <li><a href="#daysSection">حجز موعد</a></li>
+        <li><a href="#infoSection">التخصصات والتعليمات</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleChatWindow(true)">مراسلة السكرتيرة</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a id="navMapLink" href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-subtle">
+          <span>📍 موقع العيادة</span>
+        </a>
+        <a href="#daysSection" class="btn btn-dark">احجز رقمك الآن</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero & Live Queue Monitor -->
+  <header id="liveQueueSection" class="hero">
+    <div class="hero-top">
+      <div class="clinic-status-pill">
+        <span id="statusIndicatorDot" class="status-indicator"></span>
+        <span id="statusTextDisplay">الطبيب متواجد حالياً — العيادة مفتوحة</span>
+      </div>
+
+      <h1 id="heroClinicTitle" class="hero-title">احجز رقمك وتابع دورك من منزلك</h1>
+      <p id="heroClinicDesc" class="hero-subtitle">
+        لا داعي للانتظار الطويل في قاعة العيادة؛ اسحب تذكرتك الإلكترونية وتابع الرقم الحالي في الفحص لحظة بلحظة.
+      </p>
+
+      <div class="hero-meta-pills">
+        <div class="meta-pill">
+          <span>أوقات العمل:</span>
+          <strong id="workingHoursDisplay">08:30 ص - 17:00 م</strong>
+        </div>
+        <div class="meta-pill">
+          <span>سعر الفحص:</span>
+          <strong id="consultationFeeDisplay">2000 د.ج</strong>
+        </div>
+        <a id="heroMapBtn" href="https://maps.google.com" target="_blank" rel="noopener" class="meta-pill">
+          <strong>فتح الموقع في Google Maps ↗</strong>
+        </a>
+      </div>
+    </div>
+
+    <!-- Real-Time Queue Monitor Card -->
+    <div class="live-queue-board">
+      <div class="queue-now-box">
+        <div class="queue-live-tag">
+          <span>● تحديث مباشر من مكتب السكرتيرة</span>
+        </div>
+        <div style="font-size:0.95rem; font-weight:700; color:var(--text-secondary);">
+          الرقم الموجود داخل غرفة الفحص الآن
+        </div>
+        <div id="liveServingNumber" class="queue-number-giant">0</div>
+        <p id="liveQueueDayLabel" class="queue-number-caption">يتحدث الرقم تلقائياً عند نداء المريض التالي</p>
+      </div>
+
+      <div class="queue-stats-column">
+        <div class="queue-info-item">
+          <span class="queue-info-label">إجمالي المسجلين في طابور اليوم</span>
+          <span id="liveTotalWaiting" class="queue-info-value">0</span>
+        </div>
+
+        <div class="queue-info-item">
+          <span class="queue-info-label">الأماكن المتبقية المتاحة للحجز</span>
+          <span id="liveTotalRemainingSpots" class="queue-info-value" style="color:var(--accent-blue);">0</span>
+        </div>
+
+        <div id="savedTicketBanner" class="my-ticket-lookup" style="display:none;">
+          <div>
+            <span style="font-size:0.8rem; color:var(--text-secondary); display:block;">تذكرتك المحفوظة على هذا الجهاز:</span>
+            <strong id="savedTicketText" style="font-size:1.02rem; color:var(--accent-blue);">رقمك في الطابور: #--</strong>
+          </div>
+          <button class="btn btn-blue" style="padding:8px 16px; font-size:0.84rem;" onclick="reopenSavedTicket()">
+            عرض التذكرة
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Swipeable Clinic Photos -->
+    <div id="clinicGalleryWrapper" class="clinic-gallery-section">
+      <div id="clinicSwipeGallery" class="swipe-gallery"></div>
+    </div>
+  </header>
+
+  <!-- Available Days & Quota Section -->
+  <section id="daysSection" class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">أيام الحجز والأماكن الشاغرة</h2>
+        <p class="section-subtitle">اختر اليوم المناسب لك واسحب رقمك في الطابور فوراً قبل اكتمال العدد.</p>
+      </div>
+    </div>
+
+    <div id="daysGridContainer" class="days-grid">
+      <div class="empty-box">
+        <h3>جاري تحميل جدول مواعيد العيادة...</h3>
+        <p style="color:var(--text-muted); margin-top:6px;">يرجى الانتظار للحظات</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialties & Clinic Instructions -->
+  <section id="infoSection" class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">خدمات العيادة وتعليمات الحضور</h2>
+        <p class="section-subtitle">معلومات هامة لتنظيم وقتك وضمان دخولك في الموعد المحدد</p>
+      </div>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card">
+        <h3>🩺 الفحوصات والخدمات الطبية</h3>
+        <div id="servicesContainer" class="services-grid"></div>
+      </div>
+
+      <div class="bento-card">
+        <h3>📋 شروط ونظام الطابور في العيادة</h3>
+        <ul id="rulesContainer" class="rules-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Request & Approval Status Modal -->
+  <div id="bookingModal" class="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal-card">
+      <div class="modal-pull-bar"></div>
+      <div class="modal-header">
+        <h3 id="modalHeaderTitle" class="modal-title">سحب تذكرة وحجز موعد</h3>
+        <button class="close-btn" onclick="closeBookingModal()">✕</button>
+      </div>
+
+      <!-- Step 1: Booking Form View -->
+      <div id="bookingFormView">
+        <div class="selected-day-banner">
+          <div>
+            <strong id="modalDayTitle" style="font-size:1.05rem; display:block;">يوم الأحد</strong>
+            <span id="modalDayShift" style="font-size:0.82rem; color:var(--text-muted);">الفترة الصباحية</span>
+          </div>
+          <div style="text-align:left;">
+            <span id="modalDaySpots" class="spots-badge">متبقي -- أماكن</span>
+          </div>
+        </div>
+
+        <form id="bookingForm" onsubmit="submitClinicBooking(event)">
+          <div class="form-group">
+            <label class="form-label">اسم المريض الكامل</label>
+            <input type="text" id="patientNameInput" class="form-input" placeholder="اكتب الاسم واللقب" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">رقم هاتف جزائري صحيح (للتواصل بشأن الطلب)</label>
+            <input type="tel" id="patientPhoneInput" class="form-input" placeholder="مثال: 0550000000" inputmode="tel" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">نوع الزيارة</label>
+            <select id="visitTypeInput" class="form-select" required>
+              <option value="فحص جديد (كشف عام)">فحص جديد (كشف عام)</option>
+              <option value="مراجعة (كونترول)">مراجعة (كونترول)</option>
+              <option value="قراءة تحاليل أو أشعة">قراءة تحاليل أو أشعة</option>
+              <option value="استشارة طبية سريعة">استشارة طبية سريعة</option>
+            </select>
+          </div>
+
+          <button type="submit" id="submitBookingBtn" class="btn btn-blue" style="width:100%; padding:14px; font-size:1rem; border-radius:var(--radius-md); margin-top:8px;">
+            إرسال طلب التسجيل للمراجعة
+          </button>
+        </form>
+      </div>
+
+      <!-- Step 2: Electronic Ticket Confirmation View -->
+      <div id="ticketConfirmationView" class="ticket-card-view">
+        <div id="bookingConfirmationStatus" style="color:var(--success); font-weight:800; font-size:0.95rem;">
+          ✓ تم إرسال طلب التسجيل
+        </div>
+
+        <div id="pendingApprovalMessage" style="background:var(--warning-bg); color:#8A4B00; padding:16px; border-radius:var(--radius-md); margin:14px 0; line-height:1.8;">
+          وصلنا طلبك. سأراسلك عبر واتساب على الرقم الذي أدخلته لتأكيده، وبعد التأكيد سأراجع الطلب وأضيفك إلى الطابور.
+        </div>
+
+        <div id="ticketVisual" class="ticket-visual" style="display:none;">
+          <div class="ticket-number-circle">
+            <span>رقمك</span>
+            <strong id="ticketQueueNumDisplay">#1</strong>
+          </div>
+          <h4 id="ticketPatientNameDisplay" style="font-size:1.2rem; font-weight:800;">اسم المريض</h4>
+          <p id="ticketDayNameDisplay" style="font-size:0.9rem; color:var(--text-secondary); margin-top:2px;">يوم الموعد</p>
+
+          <div class="ticket-meta-grid">
+            <div class="ticket-meta-item">
+              <span>نوع الزيارة</span>
+              <strong id="ticketVisitTypeDisplay">فحص جديد</strong>
+            </div>
+            <div class="ticket-meta-item">
+              <span>رقم التذكرة المرجعي</span>
+              <strong id="ticketRefIdDisplay">#--</strong>
+            </div>
+          </div>
+        </div>
+
+        <a id="ticketWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="display:none; width:100%; padding:14px; font-size:0.98rem; border-radius:var(--radius-md); margin-bottom:10px;">
+          💬 إرسال نسخة من تذكرتي لواتساب العيادة لتسريع التأكيد
+        </a>
+
+        <button type="button" class="btn btn-subtle" style="width:100%; padding:12px; border-radius:var(--radius-md);" onclick="closeBookingModal()">
+          إغلاق ومتابعة الطابور
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Floating Buttons -->
+  <div class="desktop-floating-actions">
+    <button class="fab-btn fab-chat" onclick="toggleChatWindow()">
+      <span>💬 استفسار مع السكرتيرة</span>
+    </button>
+    <a id="desktopWhatsAppFab" href="https://wa.me/" target="_blank" rel="noopener" class="fab-btn fab-whatsapp">
+      <span>واتساب العيادة</span>
+    </a>
+  </div>
+
+  <!-- Mobile App-Like Bottom Navigation Bar -->
+  <nav class="mobile-bottom-bar">
+    <a href="#daysSection" class="bottom-nav-item active">
+      <span class="icon">📅</span>
+      <span>حجز رقم</span>
+    </a>
+    <a href="#liveQueueSection" class="bottom-nav-item">
+      <span class="icon">🔢</span>
+      <span>الطابور الآن</span>
+    </a>
+    <button type="button" class="bottom-nav-item" onclick="toggleChatWindow()">
+      <span class="icon">💬</span>
+      <span>السكرتيرة</span>
+    </button>
+    <a id="mobileWhatsAppBtn" href="https://wa.me/" target="_blank" rel="noopener" class="bottom-nav-item" style="color:#158527;">
+      <span class="icon">🟢</span>
+      <span>واتساب العيادة</span>
+    </a>
+  </nav>
+
+  <!-- Restricted Chat Window (10 Messages Limit) -->
+  <div id="chatWindow" class="chat-window">
+    <div class="chat-header">
+      <div>
+        <h4 style="font-size:1.02rem; font-weight:800;">مكتب الاستقبال والسكرتارية</h4>
+        <span style="font-size:0.76rem; color:var(--text-muted);">استفسارات سريعة ومباشرة</span>
+      </div>
+      <button class="close-btn" onclick="toggleChatWindow(false)">✕</button>
+    </div>
+
+    <div id="chatCountersBar" class="chat-counters-bar" style="display:none;">
+      <span id="patientRemainingCounter">رسائلك المتبقية: 10 / 10</span>
+      <span id="adminRemainingCounter">ردود السكرتيرة: 10 / 10</span>
+    </div>
+
+    <!-- Start Chat View -->
+    <div id="chatStartView" style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <h4 style="margin-bottom:8px; font-size:1.08rem; font-weight:800;">بدء استفسار سريع</h4>
+      <p style="font-size:0.86rem; color:var(--text-secondary); margin-bottom:18px;">
+        متاح لكل مريض إرسال 10 رسائل قصيرة و10 ردود من السكرتيرة للإجابة السريعة عن تساؤلاتكم.
+      </p>
+      <form onsubmit="startNewClinicChat(event)">
+        <div class="form-group">
+          <label class="form-label">اسم المريض</label>
+          <input type="text" id="chatInitName" class="form-input" placeholder="اكتب اسمك الكريم" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم الهاتف (واتساب)</label>
+          <input type="tel" id="chatInitPhone" class="form-input" placeholder="رقم هاتفك" required />
+        </div>
+        <button type="submit" class="btn btn-dark" style="width:100%; padding:12px;">بدء المحادثة الآن</button>
+      </form>
+    </div>
+
+    <!-- Active Messages View -->
+    <div id="chatMessagesView" class="chat-body" style="display:none;"></div>
+
+    <div id="chatFooterView" class="chat-footer" style="display:none;">
+      <form id="chatSendForm" class="chat-input-row" onsubmit="sendPatientChatMessage(event)">
+        <input type="text" id="chatMessageInput" placeholder="اكتب استفسارك هنا..." required maxlength="240" />
+        <button type="submit" class="btn btn-blue" style="padding:10px 18px;">إرسال</button>
+      </form>
+      <div id="chatLockedNotice" class="chat-locked-banner" style="display:none;">
+        تم إغلاق المحادثة لانتهاء الحد المسموح (10 رسائل). يمكنك التواصل عبر زر واتساب العيادة.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p id="footerClinicName">© جميع الحقوق محفوظة للعيادة الطبية — نظام تنظيم المواعيد والطابور الذكي</p>
+  </footer>
+
+  <!-- Firebase Modular SDK & Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      where,
+      updateDoc,
+      onSnapshot,
+      runTransaction
+    } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMq-96o2M6QdE5VoVyOuBroGgPdaOIp_U",
+      authDomain: "tabibi-8fd7d.firebaseapp.com",
+      projectId: "tabibi-8fd7d",
+      storageBucket: "tabibi-8fd7d.firebasestorage.app",
+      messagingSenderId: "288651582661",
+      appId: "1:288651582661:web:85096d00db7ab6958764ac",
+      measurementId: "G-P5MBZQT8TY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let clinicSettings = {
+      clinicName: "عيادة النخبة الطبية",
+      doctorSpecialty: "طب وجراحة عامة ومتابعة الحالات المزمنة",
+      description: "احجز رقمك في الطابور من هاتفك وتابع وصول دورك مباشرة بدون عناء الانتظار الطويل في قاعة العيادة.",
+      clinicStatus: "open", // open | busy | closed
+      currentServingNumber: 1,
+      activeQueueLabel: "طابور اليوم المباشر",
+      workingHours: "08:30 ص - 17:00 م",
+      consultationFee: "2000 د.ج",
+      whatsappPhone: "213550000000",
+      countryCode: "213",
+      mapUrl: "https://maps.google.com",
+      logoData: "",
+      clinicImages: [],
+      services: [
+        "فحص طبي شامل",
+        "متابعة الأمراض المزمنة",
+        "قراءة التحاليل والأشعة",
+        "تخطيط القلب (ECG)",
+        "فحص بالسونار (إيكوغرافيا)",
+        "استشارات طبية دقيقة"
+      ],
+      rules: [
+        "يرجى الحضور للعيادة عندما يقترب رقمك بـ 3 أرقام على الأقل.",
+        "إحضار الدفتر الصحي والتحاليل أو الأشعة السابقة إن وجدت.",
+        "المريض الذي يتأخر عن النداء على رقمه ينتظر دخول المريض الذي يليه.",
+        "الحالات الاستعجالية القصوى لها أولوية الدخول بتقدير الطبيب."
+      ]
+    };
+
+    let allDays = [];
+    let selectedDayForBooking = null;
+    let activeChatId = localStorage.getItem("clinic_active_chat_id") || null;
+    let chatUnsubscribe = null;
+    let currentChatData = null;
+    let pendingBookingUnsubscribe = null;
+
+    // Format WhatsApp Number
+    function formatWhatsAppNumber(rawPhone) {
+      let cleaned = String(rawPhone || "").replace(/\D/g, "");
+      const code = String(clinicSettings.countryCode || "213").replace(/\D/g, "");
+      if (cleaned.startsWith("00")) {
+        cleaned = cleaned.substring(2);
+      } else if (cleaned.startsWith("0")) {
+        cleaned = code + cleaned.substring(1);
+      } else if (cleaned && !cleaned.startsWith(code) && cleaned.length <= 10) {
+        cleaned = code + cleaned;
+      }
+      return cleaned || "213550000000";
+    }
+
+    function normalizePatientPhone(rawPhone) {
+      let digits = String(rawPhone || "").replace(/\D/g, "");
+      if (digits.startsWith("00")) digits = digits.substring(2);
+
+      const countryCode = String(clinicSettings.countryCode || "213").replace(/\D/g, "");
+      if (digits.startsWith("0")) {
+        digits = countryCode + digits.substring(1);
+      } else if (!digits.startsWith(countryCode)) {
+        digits = countryCode + digits;
+      }
+
+      const nationalNumber = digits.substring(countryCode.length);
+      return /^[567]\d{8}$/.test(nationalNumber) ? digits : null;
+    }
+
+    async function createOnlineBookingId(dayId, phone) {
+      const input = new TextEncoder().encode(phone);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", input);
+      const fingerprint = Array.from(new Uint8Array(hashBuffer), (byte) => byte.toString(16).padStart(2, "0")).join("");
+      return `online_${dayId}_${fingerprint}`;
+    }
+
+    // 1. Real-Time Listener for Clinic Settings & Live Serving Queue Number
+    function listenToClinicSettings() {
+      const ref = doc(db, "clinicSettings", "info");
+      onSnapshot(ref, (snap) => {
+        if (snap.exists()) {
+          clinicSettings = { ...clinicSettings, ...snap.data() };
+        }
+        renderClinicSettings();
+      });
+    }
+
+    function renderClinicSettings() {
+      document.title = `${clinicSettings.clinicName} | الحجز ومتابعة الطابور`;
+      document.getElementById("navClinicName").textContent = clinicSettings.clinicName;
+      document.getElementById("navDoctorSpecialty").textContent = clinicSettings.doctorSpecialty;
+      document.getElementById("heroClinicTitle").textContent = clinicSettings.clinicName;
+      document.getElementById("heroClinicDesc").textContent = clinicSettings.description;
+      document.getElementById("workingHoursDisplay").textContent = clinicSettings.workingHours;
+      document.getElementById("consultationFeeDisplay").textContent = clinicSettings.consultationFee;
+      document.getElementById("footerClinicName").textContent = `© ${new Date().getFullYear()} ${clinicSettings.clinicName} — جميع الحقوق محفوظة`;
+
+      // Status Indicator
+      const dot = document.getElementById("statusIndicatorDot");
+      const statusText = document.getElementById("statusTextDisplay");
+      dot.className = "status-indicator";
+      if (clinicSettings.clinicStatus === "busy") {
+        dot.classList.add("busy");
+        statusText.textContent = "الطبيب في حالة طارئة / تأخير بسيط حالياً";
+      } else if (clinicSettings.clinicStatus === "closed") {
+        dot.classList.add("closed");
+        statusText.textContent = "العيادة مغلقة حالياً — الحجز الإلكتروني متاح للأيام القادمة";
+      } else {
+        statusText.textContent = "الطبيب متواجد حالياً — العيادة مفتوحة وتستقبل المرضى";
+      }
+
+      // Live Serving Number
+      document.getElementById("liveServingNumber").textContent = Number(clinicSettings.currentServingNumber || 0);
+      document.getElementById("liveQueueDayLabel").textContent = clinicSettings.activeQueueLabel || "يتحدث الرقم تلقائياً من مكتب السكرتيرة";
+
+      // Logo
+      const navLogo = document.getElementById("navLogo");
+      const navPlaceholder = document.getElementById("navLogoPlaceholder");
+      if (clinicSettings.logoData) {
+        navLogo.src = clinicSettings.logoData;
+        navLogo.style.display = "block";
+        navPlaceholder.style.display = "none";
+      } else {
+        navLogo.style.display = "none";
+        navPlaceholder.style.display = "flex";
+        navPlaceholder.textContent = (clinicSettings.clinicName || "ع").charAt(0);
+      }
+
+      // Map & WhatsApp Links
+      const mapUrl = clinicSettings.mapUrl || "https://maps.google.com";
+      document.getElementById("navMapLink").href = mapUrl;
+      document.getElementById("heroMapBtn").href = mapUrl;
+
+      const waNum = formatWhatsAppNumber(clinicSettings.whatsappPhone);
+      const waDefaultMsg = encodeURIComponent(`السلام عليكم، أود الاستفسار من ${clinicSettings.clinicName}`);
+      const waLink = `https://wa.me/${waNum}?text=${waDefaultMsg}`;
+      document.getElementById("desktopWhatsAppFab").href = waLink;
+      document.getElementById("mobileWhatsAppBtn").href = waLink;
+
+      // Swipeable Clinic Images
+      const galleryWrapper = document.getElementById("clinicGalleryWrapper");
+      const swipeGallery = document.getElementById("clinicSwipeGallery");
+      const images = Array.isArray(clinicSettings.clinicImages) ? clinicSettings.clinicImages : [];
+      if (images.length > 0) {
+        galleryWrapper.style.display = "block";
+        swipeGallery.innerHTML = images.map((src) => `
+          <div class="swipe-slide">
+            <img src="${src}" alt="${escapeHtml(clinicSettings.clinicName)}" />
+          </div>
+        `).join("");
+      } else {
+        galleryWrapper.style.display = "none";
+      }
+
+      // Services
+      const srvContainer = document.getElementById("servicesContainer");
+      srvContainer.innerHTML = "";
+      (clinicSettings.services || []).forEach((s) => {
+        if (!s.trim()) return;
+        const div = document.createElement("div");
+        div.className = "service-chip";
+        div.innerHTML = `<span class="service-dot"></span><span>${escapeHtml(s)}</span>`;
+        srvContainer.appendChild(div);
+      });
+
+      // Rules
+      const rulesContainer = document.getElementById("rulesContainer");
+      rulesContainer.innerHTML = "";
+      (clinicSettings.rules || []).forEach((r) => {
+        if (!r.trim()) return;
+        const li = document.createElement("li");
+        li.textContent = r;
+        rulesContainer.appendChild(li);
+      });
+    }
+
+    // 2. Listen to Available Clinic Days & Quota in Real-Time
+    function listenToClinicDays() {
+      const ref = collection(db, "clinicDays");
+      onSnapshot(ref, (snap) => {
+        allDays = [];
+        let totalBookedToday = 0;
+        let totalRemaining = 0;
+
+        snap.forEach((d) => {
+          const data = { id: d.id, ...d.data() };
+          allDays.push(data);
+          totalBookedToday += Number(data.lastQueueNumber || 0);
+          if (data.isOpen !== false) {
+            totalRemaining += Math.max(0, Number(data.availableSpots || 0));
+          }
+        });
+
+        allDays.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+        document.getElementById("liveTotalWaiting").textContent = totalBookedToday;
+        document.getElementById("liveTotalRemainingSpots").textContent = totalRemaining;
+        renderClinicDays();
+      });
+    }
+
+    function renderClinicDays() {
+      const container = document.getElementById("daysGridContainer");
+      container.innerHTML = "";
+
+      // Filter days that have spots > 0 and are open
+      const visibleDays = allDays.filter((d) => d.isOpen !== false && Number(d.availableSpots) > 0);
+
+      if (visibleDays.length === 0) {
+        container.innerHTML = `
+          <div class="empty-box">
+            <h3>اكتمل عدد الحجوزات المتاحة حالياً</h3>
+            <p style="color:var(--text-muted); margin-top:6px;">
+              جميع الأرقام المتاحة تم حجزها أو تم إيقاف التسجيل مؤقتاً من مكتب السكرتيرة. يمكنك الاستفسار عبر المحادثة أو واتساب العيادة.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      visibleDays.forEach((day) => {
+        const spots = Number(day.availableSpots || 0);
+
+        const card = document.createElement("div");
+        card.className = "day-card";
+        card.innerHTML = `
+          <div>
+            <div class="day-card-top">
+              <div>
+                <h3 class="day-title">${escapeHtml(day.dayName)}</h3>
+                <span class="day-date-sub">${escapeHtml(day.dateText || "")}</span>
+              </div>
+              <span class="spots-badge ${spots <= 4 ? "low" : ""}">
+                ● متبقي ${spots} ${spots === 1 ? "مكان واحد" : "أماكن"}
+              </span>
+            </div>
+
+            <div class="day-details-box" style="margin-top:16px;">
+              <div class="day-detail-row">
+                <span>الفترة / التوقيت:</span>
+                <strong style="color:var(--text-primary);">${escapeHtml(day.shiftTime || "الفترة الصباحية")}</strong>
+              </div>
+              <div class="day-detail-row">
+                <span>إجراء الحجز:</span>
+                <strong style="color:var(--accent-blue);">طلب تسجيل بانتظار موافقة الإدارة</strong>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-dark day-book-btn">إرسال طلب التسجيل</button>
+        `;
+
+        card.querySelector(".day-book-btn").onclick = () => openBookingModal(day);
+        container.appendChild(card);
+      });
+    }
+
+    // 3. Booking Modal & Atomic Queue Ticket Assignment
+    window.openBookingModal = function(day) {
+      selectedDayForBooking = day;
+      document.getElementById("modalHeaderTitle").textContent = "طلب تسجيل";
+      document.getElementById("bookingFormView").style.display = "block";
+      document.getElementById("ticketConfirmationView").style.display = "none";
+
+      document.getElementById("modalDayTitle").textContent = `${day.dayName} ${day.dateText ? `(${day.dateText})` : ""}`;
+      document.getElementById("modalDayShift").textContent = day.shiftTime || "دوام العيادة";
+      document.getElementById("modalDaySpots").textContent = `متبقي ${day.availableSpots} أماكن`;
+
+      document.getElementById("bookingModal").classList.add("open");
+    };
+
+    window.closeBookingModal = function() {
+      document.getElementById("bookingModal").classList.remove("open");
+      selectedDayForBooking = null;
+    };
+
+    window.handleOverlayClick = function(e) {
+      if (e.target.id === "bookingModal") {
+        closeBookingModal();
+      }
+    };
+
+    window.submitClinicBooking = async function(e) {
+      e.preventDefault();
+      if (!selectedDayForBooking) return;
+
+      const btn = document.getElementById("submitBookingBtn");
+      btn.disabled = true;
+      btn.textContent = "جاري إرسال طلبك...";
+
+      const patientName = document.getElementById("patientNameInput").value.trim();
+      const rawPatientPhone = document.getElementById("patientPhoneInput").value.trim();
+      const patientPhone = normalizePatientPhone(rawPatientPhone);
+      const visitType = document.getElementById("visitTypeInput").value;
+      if (!patientPhone) {
+        alert("يرجى إدخال رقم هاتف جزائري صحيح يبدأ بـ 05 أو 06 أو 07.");
+        btn.disabled = false;
+        btn.textContent = "إرسال طلب التسجيل للمراجعة";
+        return;
+      }
+
+      try {
+        let dayTitleFull = `${selectedDayForBooking.dayName} ${selectedDayForBooking.dateText || ""}`.trim();
+        const dayId = selectedDayForBooking.id;
+        const phoneCandidates = [...new Set([
+          patientPhone,
+          rawPatientPhone,
+          rawPatientPhone.replace(/\D/g, "")
+        ])];
+        const priorBookings = await getDocs(query(collection(db, "clinicBookings"), where("patientPhone", "in", phoneCandidates)));
+        const hasExistingRegistration = priorBookings.docs.some((bookingDoc) => {
+          const booking = bookingDoc.data();
+          return booking.dayId === dayId && normalizePatientPhone(booking.patientPhone) === patientPhone;
+        });
+        if (hasExistingRegistration) {
+          throw new Error("لديك تسجيل سابق لهذا اليوم. يسمح بتسجيل واحد فقط لكل هاتف في اليوم نفسه.");
+        }
+
+        const bookingId = await createOnlineBookingId(dayId, patientPhone);
+        const bookingRef = doc(db, "clinicBookings", bookingId);
+        await runTransaction(db, async (transaction) => {
+          const dayRef = doc(db, "clinicDays", dayId);
+          const [dayDoc, bookingDoc] = await Promise.all([
+            transaction.get(dayRef),
+            transaction.get(bookingRef)
+          ]);
+          if (!dayDoc.exists()) throw new Error("هذا اليوم لم يعد متاحاً.");
+          if (bookingDoc.exists()) {
+            throw new Error("لديك طلب تسجيل سابق لهذا اليوم. يسمح بطلب واحد فقط لكل هاتف في اليوم نفسه.");
+          }
+
+          const dayData = dayDoc.data();
+          if (Number(dayData.availableSpots || 0) <= 0 || dayData.isOpen === false) {
+            throw new Error("عذراً، لا توجد أماكن متاحة لهذا اليوم حالياً.");
+          }
+
+          transaction.set(bookingRef, {
+            dayId,
+            dayName: dayTitleFull,
+            shiftTime: selectedDayForBooking.shiftTime || "",
+            patientName,
+            patientPhone,
+            visitType,
+            source: "online",
+            status: "pending-approval",
+            createdAt: Date.now()
+          });
+        });
+
+        const pendingRequest = { id: bookingId, dayName: dayTitleFull };
+        localStorage.removeItem("clinic_saved_ticket");
+        localStorage.setItem("clinic_pending_booking", JSON.stringify(pendingRequest));
+        localStorage.removeItem("clinic_booking_notice");
+        document.getElementById("bookingForm").reset();
+        showPendingBookingConfirmation();
+        listenToPendingBooking(bookingId);
+      } catch (err) {
+        alert(err.message || "حدث خطأ أثناء الحجز، يرجى المحاولة مرة أخرى.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "إرسال طلب التسجيل للمراجعة";
+      }
+    };
+
+    function showPendingBookingConfirmation(message = "وصلنا طلبك. سأراسلك عبر واتساب على الرقم الذي أدخلته لتأكيده، وبعد التأكيد سأراجع الطلب وأضيفك إلى الطابور.") {
+      document.getElementById("modalHeaderTitle").textContent = "طلب التسجيل";
+      document.getElementById("bookingFormView").style.display = "none";
+      document.getElementById("ticketConfirmationView").style.display = "block";
+      const isRejected = message.startsWith("تم رفض");
+      const status = document.getElementById("bookingConfirmationStatus");
+      status.textContent = isRejected ? "✕ تم رفض طلب التسجيل" : "✓ تم إرسال طلب التسجيل للمراجعة";
+      status.style.color = isRejected ? "var(--danger)" : "var(--success)";
+      document.getElementById("ticketVisual").style.display = "none";
+      document.getElementById("ticketWhatsAppBtn").style.display = "none";
+      document.getElementById("pendingApprovalMessage").style.display = "block";
+      document.getElementById("pendingApprovalMessage").textContent = message;
+    }
+
+    function listenToPendingBooking(bookingId) {
+      if (pendingBookingUnsubscribe) pendingBookingUnsubscribe();
+      pendingBookingUnsubscribe = onSnapshot(doc(db, "clinicBookings", bookingId), (snap) => {
+        if (!snap.exists()) {
+          const pendingRaw = localStorage.getItem("clinic_pending_booking");
+          let dayName = "";
+          try {
+            dayName = pendingRaw ? JSON.parse(pendingRaw).dayName || "" : "";
+          } catch (err) {
+            console.error("Unable to read pending booking details:", err);
+          }
+          localStorage.removeItem("clinic_pending_booking");
+          localStorage.setItem("clinic_booking_notice", JSON.stringify({
+            dayName,
+            message: "تم رفض طلب التسجيل وحذفه من قائمة الطلبات. يمكنك إرسال طلب جديد إذا رغبت."
+          }));
+          if (pendingBookingUnsubscribe) {
+            pendingBookingUnsubscribe();
+            pendingBookingUnsubscribe = null;
+          }
+          renderSavedTicketBanner();
+          showPendingBookingConfirmation("تم رفض طلب التسجيل وحذفه من قائمة الطلبات. يمكنك إرسال طلب جديد إذا رغبت.");
+          return;
+        }
+
+        const booking = snap.data();
+        if (booking.status === "waiting" && Number(booking.queueNumber) > 0) {
+          const ticket = {
+            refId: bookingId.slice(-6).toUpperCase(),
+            queueNumber: booking.queueNumber,
+            patientName: booking.patientName,
+            patientPhone: booking.patientPhone,
+            dayName: booking.dayName,
+            visitType: booking.visitType
+          };
+          localStorage.removeItem("clinic_pending_booking");
+          localStorage.removeItem("clinic_booking_notice");
+          localStorage.setItem("clinic_saved_ticket", JSON.stringify(ticket));
+          renderSavedTicketBanner();
+          displayElectronicTicketCard(ticket);
+          document.getElementById("bookingConfirmationStatus").textContent = "✓ تمت الموافقة وتم تثبيتك في الطابور";
+          if (pendingBookingUnsubscribe) {
+            pendingBookingUnsubscribe();
+            pendingBookingUnsubscribe = null;
+          }
+        } else if (booking.status === "pending-approval") {
+          showPendingBookingConfirmation();
+        }
+      }, (err) => {
+        console.error("Unable to listen for booking approval:", err);
+      });
+    }
+
+    function displayElectronicTicketCard(ticket) {
+      document.getElementById("modalHeaderTitle").textContent = "تذكرة موعدك الإلكترونية";
+      document.getElementById("bookingFormView").style.display = "none";
+      document.getElementById("ticketConfirmationView").style.display = "block";
+      document.getElementById("pendingApprovalMessage").style.display = "none";
+      document.getElementById("ticketVisual").style.display = "block";
+      document.getElementById("ticketWhatsAppBtn").style.display = "inline-flex";
+      document.getElementById("bookingConfirmationStatus").textContent = "✓ تمت الموافقة وتم تثبيتك في الطابور";
+
+      document.getElementById("ticketQueueNumDisplay").textContent = `#${ticket.queueNumber}`;
+      document.getElementById("ticketPatientNameDisplay").textContent = ticket.patientName;
+      document.getElementById("ticketDayNameDisplay").textContent = ticket.dayName;
+      document.getElementById("ticketVisitTypeDisplay").textContent = ticket.visitType;
+      document.getElementById("ticketRefIdDisplay").textContent = `#${ticket.refId}`;
+
+      const waNum = formatWhatsAppNumber(clinicSettings.whatsappPhone);
+      const msg = encodeURIComponent(
+        `مرحباً، لقد قمت للتو بحجز موعد عبر موقع العيادة.\n` +
+        `- رقم الطابور: #${ticket.queueNumber}\n` +
+        `- الاسم: ${ticket.patientName}\n` +
+        `- اليوم: ${ticket.dayName}\n` +
+        `- نوع الزيارة: ${ticket.visitType}\n` +
+        `- رمز التذكرة: #${ticket.refId}\n` +
+        `أرجو تأكيد الحجز.`
+      );
+      document.getElementById("ticketWhatsAppBtn").href = `https://wa.me/${waNum}?text=${msg}`;
+    }
+
+    function renderSavedTicketBanner() {
+      const raw = localStorage.getItem("clinic_saved_ticket");
+      const banner = document.getElementById("savedTicketBanner");
+      if (!raw) {
+        const pendingRaw = localStorage.getItem("clinic_pending_booking");
+        if (!pendingRaw) {
+          const noticeRaw = localStorage.getItem("clinic_booking_notice");
+          if (noticeRaw) {
+            try {
+              const notice = JSON.parse(noticeRaw);
+              banner.style.display = "flex";
+              document.getElementById("savedTicketText").textContent = `${notice.message}${notice.dayName ? ` (${notice.dayName})` : ""}`;
+            } catch (e) {
+              banner.style.display = "none";
+            }
+          } else {
+            banner.style.display = "none";
+          }
+          return;
+        }
+        try {
+          const pending = JSON.parse(pendingRaw);
+          banner.style.display = "flex";
+          document.getElementById("savedTicketText").textContent = `طلب تسجيلك قيد المراجعة (${pending.dayName})`;
+        } catch (e) {
+          banner.style.display = "none";
+        }
+        return;
+      }
+      try {
+        const ticket = JSON.parse(raw);
+        banner.style.display = "flex";
+        document.getElementById("savedTicketText").textContent = `رقمك المحجوز: #${ticket.queueNumber} (${ticket.dayName})`;
+      } catch (e) {
+        banner.style.display = "none";
+      }
+    }
+
+    window.reopenSavedTicket = function() {
+      const raw = localStorage.getItem("clinic_saved_ticket");
+      if (raw) {
+        const ticket = JSON.parse(raw);
+        displayElectronicTicketCard(ticket);
+      } else {
+        const pendingRaw = localStorage.getItem("clinic_pending_booking");
+        if (pendingRaw) {
+          const pending = JSON.parse(pendingRaw);
+          showPendingBookingConfirmation();
+          listenToPendingBooking(pending.id);
+        } else {
+          const noticeRaw = localStorage.getItem("clinic_booking_notice");
+          if (!noticeRaw) return;
+          showPendingBookingConfirmation(JSON.parse(noticeRaw).message);
+        }
+      }
+      document.getElementById("bookingModal").classList.add("open");
+    };
+
+    function restorePendingBookingListener() {
+      const pendingRaw = localStorage.getItem("clinic_pending_booking");
+      if (!pendingRaw) return;
+      try {
+        const pending = JSON.parse(pendingRaw);
+        if (pending.id) listenToPendingBooking(pending.id);
+      } catch (err) {
+        console.error("Unable to restore pending booking:", err);
+        localStorage.removeItem("clinic_pending_booking");
+      }
+    }
+
+    // 4. Restricted 10-Message Chat System
+    window.toggleChatWindow = function(forceState) {
+      const win = document.getElementById("chatWindow");
+      const shouldOpen = typeof forceState === "boolean" ? forceState : !win.classList.contains("open");
+      win.classList.toggle("open", shouldOpen);
+      if (shouldOpen && activeChatId) {
+        connectToClinicChat(activeChatId);
+      }
+    };
+
+    window.startNewClinicChat = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById("chatInitName").value.trim();
+      const phone = document.getElementById("chatInitPhone").value.trim();
+      if (!name || !phone) return;
+
+      try {
+        const docRef = await addDoc(collection(db, "clinicChats"), {
+          patientName: name,
+          patientPhone: phone,
+          patientMsgCount: 0,
+          adminMsgCount: 0,
+          status: "active",
+          updatedAt: Date.now(),
+          messages: []
+        });
+
+        activeChatId = docRef.id;
+        localStorage.setItem("clinic_active_chat_id", activeChatId);
+        connectToClinicChat(activeChatId);
+      } catch (err) {
+        console.error(err);
+        alert("تعذر بدء المحادثة، حاول مجدداً.");
+      }
+    };
+
+    function connectToClinicChat(chatId) {
+      if (chatUnsubscribe) chatUnsubscribe();
+      chatUnsubscribe = onSnapshot(doc(db, "clinicChats", chatId), (snap) => {
+        if (!snap.exists()) {
+          localStorage.removeItem("clinic_active_chat_id");
+          activeChatId = null;
+          document.getElementById("chatStartView").style.display = "flex";
+          document.getElementById("chatCountersBar").style.display = "none";
+          document.getElementById("chatMessagesView").style.display = "none";
+          document.getElementById("chatFooterView").style.display = "none";
+          return;
+        }
+        currentChatData = snap.data();
+        renderActiveClinicChat(currentChatData);
+      });
+    }
+
+    function renderActiveClinicChat(chatData) {
+      document.getElementById("chatStartView").style.display = "none";
+      document.getElementById("chatCountersBar").style.display = "flex";
+      document.getElementById("chatMessagesView").style.display = "flex";
+      document.getElementById("chatFooterView").style.display = "block";
+
+      const pUsed = Number(chatData.patientMsgCount || 0);
+      const aUsed = Number(chatData.adminMsgCount || 0);
+      const pLeft = Math.max(0, 10 - pUsed);
+      const aLeft = Math.max(0, 10 - aUsed);
+
+      document.getElementById("patientRemainingCounter").textContent = `رسائلك المتبقية: ${pLeft} / 10`;
+      document.getElementById("adminRemainingCounter").textContent = `ردود السكرتيرة: ${aLeft} / 10`;
+
+      const msgBox = document.getElementById("chatMessagesView");
+      msgBox.innerHTML = "";
+      const msgs = chatData.messages || [];
+
+      if (msgs.length === 0) {
+        msgBox.innerHTML = `<div style="margin:auto; text-align:center; color:var(--text-muted); font-size:0.85rem;">اكتب سؤالك بالأسفل وسترد عليك السكرتيرة مباشرة.</div>`;
+      } else {
+        msgs.forEach((m) => {
+          const div = document.createElement("div");
+          div.className = `msg-bubble ${m.sender === "patient" ? "msg-patient" : "msg-admin"}`;
+          const timeStr = m.timestamp ? new Date(m.timestamp).toLocaleTimeString("ar-DZ", { hour: "2-digit", minute: "2-digit" }) : "";
+          div.innerHTML = `
+            <div>${escapeHtml(m.text)}</div>
+            <span class="msg-meta">${m.sender === "patient" ? "أنت" : "السكرتيرة"} • ${timeStr}</span>
+          `;
+          msgBox.appendChild(div);
+        });
+        msgBox.scrollTop = msgBox.scrollHeight;
+      }
+
+      const isLocked = chatData.status === "closed" || pUsed >= 10;
+      document.getElementById("chatSendForm").style.display = isLocked ? "none" : "flex";
+      document.getElementById("chatLockedNotice").style.display = isLocked ? "block" : "none";
+    }
+
+    window.sendPatientChatMessage = async function(e) {
+      e.preventDefault();
+      if (!activeChatId || !currentChatData) return;
+
+      const input = document.getElementById("chatMessageInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const pUsed = Number(currentChatData.patientMsgCount || 0);
+      const aUsed = Number(currentChatData.adminMsgCount || 0);
+      if (pUsed >= 10 || currentChatData.status === "closed") return;
+
+      input.value = "";
+      const nextPCount = pUsed + 1;
+      const nextStatus = (nextPCount >= 10 && aUsed >= 10) ? "closed" : (currentChatData.status || "active");
+
+      const updatedMessages = [
+        ...(currentChatData.messages || []),
+        { sender: "patient", text, timestamp: Date.now() }
+      ];
+
+      try {
+        await updateDoc(doc(db, "clinicChats", activeChatId), {
+          messages: updatedMessages,
+          patientMsgCount: nextPCount,
+          status: nextStatus,
+          updatedAt: Date.now()
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Start Real-Time Listeners
+    listenToClinicSettings();
+    listenToClinicDays();
+    renderSavedTicketBanner();
+    restorePendingBookingListener();
+    if (activeChatId) {
+      connectToClinicChat(activeChatId);
+    }
+  </script>
+</body>
+</html>
